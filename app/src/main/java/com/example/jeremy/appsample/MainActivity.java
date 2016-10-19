@@ -29,6 +29,14 @@ public class MainActivity extends AppCompatActivity {
                                              }
                                          }
         );
+        Button buttonMap = (Button)findViewById(R.id.buttonMap);
+        buttonMap.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+                startActivity(intent);
+            }
+        });
         Log.i(TAG, "onCreate");
     }
 

@@ -7,4 +7,5 @@
     <string name="version" />
     <string name="action_settings" />
     <string name="title_activity_main3">Main3Activity</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

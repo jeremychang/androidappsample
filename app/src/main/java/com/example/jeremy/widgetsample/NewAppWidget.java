@@ -22,17 +22,17 @@ public class NewAppWidget extends AppWidgetProvider {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
         views.setTextViewText(R.id.appwidget_text, widgetText);
 
-        // Create an Intent to launch ExampleActivity
+        // Create an Intent to launch MainActivity
         Intent intent = new Intent(context, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
 
-        //RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
         views.setOnClickPendingIntent(R.id.appwidget_text, pendingIntent);
         // Instruct the widget manager to update the widget
         Log.d(TAG, "Update NewAppWidget: appWidgetId:" + appWidgetId);
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 
+    // AppWidgetProvider is a BroadcastReceiver
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         final int N = appWidgetIds.length;
@@ -47,11 +47,13 @@ public class NewAppWidget extends AppWidgetProvider {
     @Override
     public void onEnabled(Context context) {
         // Enter relevant functionality for when the first widget is created
+        Log.d(TAG, "onEnabled");
     }
 
     @Override
     public void onDisabled(Context context) {
         // Enter relevant functionality for when the last widget is disabled
+        Log.d(TAG, "onDisabled");
     }
 }
 

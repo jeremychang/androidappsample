@@ -14,6 +14,7 @@ import android.widget.RemoteViews;
 public class NewAppWidget extends AppWidgetProvider {
 
     public final static String TAG = "NewAppWidget";
+
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 

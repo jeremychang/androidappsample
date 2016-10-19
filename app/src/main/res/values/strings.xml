@@ -3,4 +3,8 @@
     <string name="appwidget_text">WIDGET 1</string>
     <string name="appwidget_text2">WIDGET 2</string>
     <string name="add_widget">Add widget</string>
+    <string name="help" />
+    <string name="version" />
+    <string name="action_settings" />
+    <string name="title_activity_main3">Main3Activity</string>
 </resources>

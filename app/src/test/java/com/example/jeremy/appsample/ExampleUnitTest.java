@@ -1,4 +1,4 @@
-package com.example.jeremy.widgetsample;
+package com.example.jeremy.appsample;
 
 import org.junit.Test;
 

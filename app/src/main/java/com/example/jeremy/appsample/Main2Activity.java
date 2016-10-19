@@ -1,4 +1,4 @@
-package com.example.jeremy.widgetsample;
+package com.example.jeremy.appsample;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

@@ -1,4 +1,4 @@
-package com.example.jeremy.widgetsample;
+package com.example.jeremy.appsample;
 
 import android.content.Intent;
 import android.os.Bundle;

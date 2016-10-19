@@ -9,7 +9,9 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
+    public final static String EXTRA_MESSAGE = "com.example.jeremy.widgetsample.MESSAGE";
+    public final static String EXTRA_BUNDLE = "com.example.jeremy.widgetsample.BUNDLE";
+    public final static String INPUT_NAME = "NAME";
     public final static String TAG = "MainActivity";
 
     @Override
@@ -32,9 +34,9 @@ public class MainActivity extends AppCompatActivity {
         // Do something in response to button
         Intent intent = new Intent(this, Main2Activity.class);
 
-        //EditText editText = (EditText) findViewById(R.id.edit_message);
-        //String message = editText.getText().toString();
-        //intent.putExtra(EXTRA_MESSAGE, message);
+        Bundle bundle = new Bundle();
+        bundle.putString(INPUT_NAME, "lala");
+        intent.putExtra(EXTRA_BUNDLE, bundle);
         startActivity(intent);
     }
 

@@ -10,42 +10,44 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public final static String EXTRA_MESSAGE = "com.example.jeremy.widgetsample.MESSAGE";
     public final static String EXTRA_BUNDLE = "com.example.jeremy.widgetsample.BUNDLE";
     public final static String INPUT_NAME = "NAME";
     public final static String TAG = "MainActivity";
 
+
+    @Override
+    public void onClick(View view) {
+        Intent intent;
+        switch (view.getId()) {
+            case R.id.button:
+                sendMessage(view);
+                break;
+            case R.id.buttonMap:
+                intent = new Intent(MainActivity.this, MapsActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.buttonWebView:
+                intent = new Intent(MainActivity.this, WebActivity.class);
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button button = (Button)findViewById(R.id.button);
-        button.setOnClickListener(new Button.OnClickListener(){
-                                             @Override
-                                             public void onClick(View view) {
-                                                 sendMessage(view);
-                                             }
-                                         }
-        );
+        button.setOnClickListener(this);
         Button buttonMap = (Button)findViewById(R.id.buttonMap);
-        buttonMap.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, MapsActivity.class);
-                startActivity(intent);
-            }
-        });
+        buttonMap.setOnClickListener(this);
         Button buttonWebView = (Button)findViewById(R.id.buttonWebView);
-        buttonWebView.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, WebActivity.class);
-                startActivity(intent);
-            }
-        });
-
+        buttonWebView.setOnClickListener(this);
         Log.i(TAG, "onCreate");
     }
 

@@ -50,4 +50,13 @@
         android:layout_below="@+id/buttonWebView"
         android:layout_alignParentStart="true"
         android:layout_marginTop="14dp" />
+
+    <Button
+        android:text="ViewPager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:id="@+id/button_viewpager"
+        android:layout_below="@+id/buttonFragmentDemo"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

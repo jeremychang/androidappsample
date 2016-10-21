@@ -40,6 +40,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent = new Intent(MainActivity.this, FragmentRootActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.button_viewpager:
+                intent = new Intent(MainActivity.this, ViewPagerActivity.class);
+                startActivity(intent);
+                break;
             default:
                 break;
         }
@@ -57,6 +61,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonWebView.setOnClickListener(this);
         Button fragmentDemoButton = (Button)findViewById(R.id.buttonFragmentDemo);
         fragmentDemoButton.setOnClickListener(this);
+        Button viewPagerButton = (Button)findViewById(R.id.button_viewpager);
+        viewPagerButton.setOnClickListener(this);
         Log.i(TAG, "onCreate");
     }
 

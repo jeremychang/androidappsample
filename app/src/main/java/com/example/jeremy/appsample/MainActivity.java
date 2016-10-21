@@ -81,6 +81,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.help:
                 Log.d(TAG, "Help selected");
                 return true;
+            case R.id.settings:
+                Log.d(TAG, "go to settings");
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent);
+                return true;
             case R.id.version:
                 Log.d(TAG, "version selected");
                 return true;

@@ -7,8 +7,20 @@
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality. 
     -->
+    <!--
+    putting here does not work. cause it would be overriden by build.gradle
+    <uses-sdk
+        android:minSdkVersion="19"
+        android:targetSdkVersion="21"
+        />
+        -->
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Not Work for Marshmallow and above -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
 
     <application
         android:allowBackup="true"

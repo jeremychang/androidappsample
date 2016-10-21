@@ -80,6 +80,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (item.getItemId()) {
             case R.id.help:
                 Log.d(TAG, "Help selected");
+                MyDialogBuilder builder = new MyDialogBuilder(this);
+                builder.show();
                 return true;
             case R.id.settings:
                 Log.d(TAG, "go to settings");

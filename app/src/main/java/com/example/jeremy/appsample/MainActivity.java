@@ -26,11 +26,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 sendMessage(view);
                 break;
             case R.id.buttonMap:
+                Log.d(TAG, "Start MapsActivity class");
                 intent = new Intent(MainActivity.this, MapsActivity.class);
                 startActivity(intent);
                 break;
             case R.id.buttonWebView:
+                Log.d(TAG, "Start WebViewActivity class");
                 intent = new Intent(MainActivity.this, WebActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.buttonFragmentDemo:
+                Log.d(TAG, "Start FragmentRoogActivity class");
+                intent = new Intent(MainActivity.this, FragmentRootActivity.class);
                 startActivity(intent);
                 break;
             default:
@@ -48,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonMap.setOnClickListener(this);
         Button buttonWebView = (Button)findViewById(R.id.buttonWebView);
         buttonWebView.setOnClickListener(this);
+        Button fragmentDemoButton = (Button)findViewById(R.id.buttonFragmentDemo);
+        fragmentDemoButton.setOnClickListener(this);
         Log.i(TAG, "onCreate");
     }
 

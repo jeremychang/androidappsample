@@ -15,6 +15,7 @@ public class Main2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        setTitle("Hello Activity");
 
         TextView textView = (TextView) findViewById(R.id.textview);
         Bundle b = this.getIntent().getBundleExtra(MainActivity.EXTRA_BUNDLE);

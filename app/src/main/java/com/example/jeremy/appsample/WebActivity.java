@@ -16,6 +16,7 @@ public class WebActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web);
+        setTitle("Hello WebView");
 
         WebView webView = (WebView)findViewById(R.id.webview);
         // Embedded WebView in the this activity

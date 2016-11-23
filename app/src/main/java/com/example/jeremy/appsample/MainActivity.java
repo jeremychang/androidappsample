@@ -44,6 +44,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent = new Intent(MainActivity.this, ViewPagerActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.buttonBLE:
+                intent = new Intent(MainActivity.this, BLEActivity.class);
+                startActivity(intent);
+                break;
             default:
                 break;
         }
@@ -63,6 +67,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fragmentDemoButton.setOnClickListener(this);
         Button viewPagerButton = (Button)findViewById(R.id.button_viewpager);
         viewPagerButton.setOnClickListener(this);
+        Button bleButton = (Button)findViewById(R.id.buttonBLE);
+        bleButton.setOnClickListener(this);
         Log.i(TAG, "onCreate");
     }
 

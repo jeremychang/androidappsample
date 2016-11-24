@@ -107,4 +107,11 @@
     <string name="menu_scan">Scan</string>
     <string name="menu_stop">Stop</string>
 
+    <string name="device_type_classic">Classic</string>
+    <string name="device_type_dual">Dual</string>
+    <string name="device_type_le">Le</string>
+    <string name="device_type_unknown">Unknown</string>
+    <string name="device_bond_state_none">NOT BOUNDED</string>
+    <string name="device_bond_state_bonding">BOUNDING</string>
+    <string name="device_bond_state_bonded">BOUNDED</string>
 </resources>

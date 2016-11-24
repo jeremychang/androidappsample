@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -79,6 +81,7 @@ public class BLEActivity extends AppCompatActivity {
             finish();
             return;
         }
+        registerReceiver(mReceiver, new IntentFilter(BluetoothDevice.ACTION_FOUND));
     }
 
     @Override
@@ -184,6 +187,7 @@ public class BLEActivity extends AppCompatActivity {
 
             mScanning = true;
             mBluetoothAdapter.startLeScan(mLeScanCallback);
+            mBluetoothAdapter.startDiscovery();
         } else {
             mScanning = false;
             mBluetoothAdapter.stopLeScan(mLeScanCallback);
@@ -241,6 +245,8 @@ public class BLEActivity extends AppCompatActivity {
                 viewHolder = new ViewHolder();
                 viewHolder.deviceAddress = (TextView) view.findViewById(R.id.device_address);
                 viewHolder.deviceName = (TextView) view.findViewById(R.id.device_name);
+                viewHolder.deviceType = (TextView) view.findViewById(R.id.device_type);
+                viewHolder.deviceBondState = (TextView) view.findViewById(R.id.device_bond_state);
                 view.setTag(viewHolder);
             } else {
                 viewHolder = (ViewHolder) view.getTag();
@@ -252,6 +258,32 @@ public class BLEActivity extends AppCompatActivity {
                 viewHolder.deviceName.setText(deviceName);
             else
                 viewHolder.deviceName.setText(R.string.unknown_device);
+
+            switch (device.getType()) {
+                case BluetoothDevice.DEVICE_TYPE_CLASSIC:
+                    viewHolder.deviceType.setText(R.string.device_type_classic);
+                    break;
+                case BluetoothDevice.DEVICE_TYPE_DUAL:
+                    viewHolder.deviceType.setText(R.string.device_type_dual);
+                    break;
+                case BluetoothDevice.DEVICE_TYPE_LE:
+                    viewHolder.deviceType.setText(R.string.device_type_le);
+                    break;
+                case BluetoothDevice.DEVICE_TYPE_UNKNOWN:
+                    viewHolder.deviceType.setText(R.string.device_type_unknown);
+                    break;
+            }
+            switch (device.getBondState()) {
+                case BluetoothDevice.BOND_NONE:
+                    viewHolder.deviceBondState.setText(R.string.device_bond_state_none);
+                    break;
+                case BluetoothDevice.BOND_BONDING:
+                    viewHolder.deviceBondState.setText(R.string.device_bond_state_bonding);
+                    break;
+                case BluetoothDevice.BOND_BONDED:
+                    viewHolder.deviceBondState.setText(R.string.device_bond_state_bonded);
+                    break;
+            }
             viewHolder.deviceAddress.setText(device.getAddress());
 
             return view;
@@ -274,9 +306,28 @@ public class BLEActivity extends AppCompatActivity {
         }
     };
 
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver(){
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if(BluetoothDevice.ACTION_FOUND.equals(action)) {
+            int  rssi = intent.getShortExtra(BluetoothDevice.EXTRA_RSSI, Short.MIN_VALUE);
+            String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
+            String device = intent.getStringExtra(BluetoothDevice.EXTRA_DEVICE);
+            String uuid = intent.getStringExtra(BluetoothDevice.EXTRA_UUID);
+            String bond_state = intent.getStringExtra(BluetoothDevice.EXTRA_BOND_STATE);
+            Log.d(TAG, "name: " + name + "  device: " + device + "  uuid: " + uuid + "  bond_state:" + bond_state);
+            //Toast.makeText(getApplicationContext(),"  RSSI: " + rssi + "dBm", Toast.LENGTH_SHORT).show();
+        }
+    }
+};
+
+
     static class ViewHolder {
         TextView deviceName;
         TextView deviceAddress;
+        TextView deviceType;
+        TextView deviceBondState;
     }
 
 }

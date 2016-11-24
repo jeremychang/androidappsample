@@ -107,6 +107,10 @@ public class BLEActivity extends AppCompatActivity {
             case R.id.menu_stop:
                 scanLeDevice(false);
                 break;
+            case android.R.id.home:
+                onBackPressed();
+                break;
+
         }
         return true;
     }

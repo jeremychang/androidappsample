@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class BLEActivity extends AppCompatActivity {
 
@@ -195,15 +196,18 @@ public class BLEActivity extends AppCompatActivity {
         invalidateOptionsMenu();
     }
 
+    protected static HashMap<BluetoothDevice, Integer> mRssiMap = new
+                        HashMap<BluetoothDevice, Integer>();
+
     // Adapter for holding devices found through scanning.
     private class LeDeviceListAdapter extends BaseAdapter {
         private ArrayList<BluetoothDevice> mLeDevices;
+
         private LayoutInflater mInflator;
 
         public LeDeviceListAdapter() {
             super();
             mLeDevices = new ArrayList<BluetoothDevice>();
-            //mInflator = DeviceScanActivity.this.getLayoutInflater();
             mInflator = BLEActivity.this.getLayoutInflater();
         }
 
@@ -215,6 +219,10 @@ public class BLEActivity extends AppCompatActivity {
 
         public BluetoothDevice getDevice(int position) {
             return mLeDevices.get(position);
+        }
+
+        public int getIndex(BluetoothDevice device) {
+            return mLeDevices.indexOf(device);
         }
 
         public void clear() {
@@ -246,6 +254,7 @@ public class BLEActivity extends AppCompatActivity {
                 viewHolder.deviceAddress = (TextView) view.findViewById(R.id.device_address);
                 viewHolder.deviceName = (TextView) view.findViewById(R.id.device_name);
                 viewHolder.deviceType = (TextView) view.findViewById(R.id.device_type);
+                viewHolder.deviceRssi = (TextView) view.findViewById(R.id.device_rssi);
                 viewHolder.deviceBondState = (TextView) view.findViewById(R.id.device_bond_state);
                 view.setTag(viewHolder);
             } else {
@@ -285,6 +294,9 @@ public class BLEActivity extends AppCompatActivity {
                     break;
             }
             viewHolder.deviceAddress.setText(device.getAddress());
+            Integer rssi = mRssiMap.get(device);
+            if (rssi != null && viewHolder.deviceRssi != null)
+                viewHolder.deviceRssi.setText(rssi.toString() + " dBm");
 
             return view;
         }
@@ -306,17 +318,33 @@ public class BLEActivity extends AppCompatActivity {
         }
     };
 
+    private void updateRssi(BluetoothDevice device, int rssi) {
+        int index = mLeDeviceListAdapter.getIndex(device);
+        Log.d(TAG, "update rssi at index: " + index);
+        mRssiMap.put(device, rssi);
+    }
+
     private final BroadcastReceiver mReceiver = new BroadcastReceiver(){
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if(BluetoothDevice.ACTION_FOUND.equals(action)) {
-            int  rssi = intent.getShortExtra(BluetoothDevice.EXTRA_RSSI, Short.MIN_VALUE);
+            int rssi = intent.getShortExtra(BluetoothDevice.EXTRA_RSSI, Short.MIN_VALUE);
             String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
+
+            BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+            String mac = device.getAddress();
+            int type = device.getType();
+            Log.d(TAG, "name: " + name + "  rssi: " + rssi + "  mac: " + mac +
+                        "  type: " + type);
+            updateRssi(device, rssi);
+            /*
             String device = intent.getStringExtra(BluetoothDevice.EXTRA_DEVICE);
             String uuid = intent.getStringExtra(BluetoothDevice.EXTRA_UUID);
             String bond_state = intent.getStringExtra(BluetoothDevice.EXTRA_BOND_STATE);
-            Log.d(TAG, "name: " + name + "  device: " + device + "  uuid: " + uuid + "  bond_state:" + bond_state);
+            Log.d(TAG, "name: " + name + "  rssi: " + rssi +"  device: " +
+                device + "  uuid: " + uuid + "  bond_state:" + bond_state);
+            */
             //Toast.makeText(getApplicationContext(),"  RSSI: " + rssi + "dBm", Toast.LENGTH_SHORT).show();
         }
     }
@@ -327,6 +355,7 @@ public class BLEActivity extends AppCompatActivity {
         TextView deviceName;
         TextView deviceAddress;
         TextView deviceType;
+        TextView deviceRssi;
         TextView deviceBondState;
     }
 

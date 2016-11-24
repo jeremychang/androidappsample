@@ -87,7 +87,6 @@
     <string name="pref_about">About</string>
 
 
-
     <string name="ble_not_supported">BLE not supported</string>
     <string name="label_data">Data:</string>
     <string name="label_device_address">Device address:</string>

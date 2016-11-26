@@ -68,4 +68,13 @@
         android:layout_above="@+id/buttonMap"
         android:layout_centerHorizontal="true"
         android:id="@+id/buttonBLE" />
+
+    <Button
+        android:text="Retrofit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/buttonBLE"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="13dp"
+        android:id="@+id/buttonRetrofitDemo" />
 </RelativeLayout>

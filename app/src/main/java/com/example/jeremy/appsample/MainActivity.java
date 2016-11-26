@@ -48,6 +48,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent = new Intent(MainActivity.this, BLEActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.buttonRetrofitDemo:
+                intent = new Intent(MainActivity.this, RetrofitDemoActivity.class);
+                startActivity(intent);
+                break;
             default:
                 break;
         }
@@ -69,6 +73,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         viewPagerButton.setOnClickListener(this);
         Button bleButton = (Button)findViewById(R.id.buttonBLE);
         bleButton.setOnClickListener(this);
+        Button retrofitDemoButton = (Button)findViewById(R.id.buttonRetrofitDemo);
+        retrofitDemoButton.setOnClickListener(this);
         Log.i(TAG, "onCreate");
     }
 

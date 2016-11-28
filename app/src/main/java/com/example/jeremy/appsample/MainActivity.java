@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     public final static String TAG = "MainActivity";
 
     private ListView mListView;
-    private String[] mList = {"test", "Map", "WebView", "Fragment", "ViewPager", "BLE", "Retrofit"};
+    private String[] mList = {"test", "Map", "WebView", "Fragment", "ViewPager", "BLE", "Retrofit", "RecyclerView"};
     private ArrayAdapter<String> listAdapter;
 
     @Override
@@ -63,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else if (info.equals("Retrofit")) {
                     intent = new Intent(MainActivity.this, RetrofitDemoActivity.class);
+                    startActivity(intent);
+                }
+                else if (info.equals("RecyclerView")) {
+                    intent = new Intent(MainActivity.this, RecyclerViewActivity.class);
                     startActivity(intent);
                 }
             }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="titles">
+        <item>Android M</item>
+        <item>RecyclerView</item>
+        <item>ButterKnife</item>
+        <item>CardView</item>
+        <item>Android.support.v7.widget</item>
+        <item>Nginx</item>
+        <item>Node.js</item>
+        <item>Golang</item>
+        <item>Java</item>
+        <item>Python</item>
+        <item>Linux</item>
+    </string-array>
+</resources>

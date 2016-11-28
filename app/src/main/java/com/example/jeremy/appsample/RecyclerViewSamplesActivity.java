@@ -13,7 +13,9 @@ public class RecyclerViewSamplesActivity extends AppCompatActivity {
 
 
     private ListView mListView;
-    private String[] mList = {"RecyclerView", "RecyclerView2", "RecyclerView3"};
+    private String[] mList = {"RecyclerView", "RecyclerView2", "RecyclerView3",
+                              "RecyclerView4", "RecyclerView5", "RecyclerView6"
+                              };
     private ArrayAdapter<String> listAdapter;
 
     @Override
@@ -44,6 +46,27 @@ public class RecyclerViewSamplesActivity extends AppCompatActivity {
                     intent = new Intent(RecyclerViewSamplesActivity.this, RecyclerViewActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putInt(RecyclerViewActivity.LAYOUT_MODE, RecyclerViewActivity.LAYOUT_MODE_STAGGERED_GRID);
+                    intent.putExtra(RecyclerViewActivity.EXTRA_BUNDLE, bundle);
+                    startActivity(intent);
+                } else if (info.equals("RecyclerView4")) {
+                    intent = new Intent(RecyclerViewSamplesActivity.this, RecyclerViewActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt(RecyclerViewActivity.LAYOUT_MODE, RecyclerViewActivity.LAYOUT_MODE_LINEAR);
+                    bundle.putInt(RecyclerViewActivity.HOLDER_TYPE, RecyclerViewActivity.HOLDER_TYPE_IMAGE);
+                    intent.putExtra(RecyclerViewActivity.EXTRA_BUNDLE, bundle);
+                    startActivity(intent);
+                } else if (info.equals("RecyclerView5")) {
+                    intent = new Intent(RecyclerViewSamplesActivity.this, RecyclerViewActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt(RecyclerViewActivity.LAYOUT_MODE, RecyclerViewActivity.LAYOUT_MODE_GRID);
+                    bundle.putInt(RecyclerViewActivity.HOLDER_TYPE, RecyclerViewActivity.HOLDER_TYPE_IMAGE);
+                    intent.putExtra(RecyclerViewActivity.EXTRA_BUNDLE, bundle);
+                    startActivity(intent);
+                } else if (info.equals("RecyclerView6")) {
+                    intent = new Intent(RecyclerViewSamplesActivity.this, RecyclerViewActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt(RecyclerViewActivity.LAYOUT_MODE, RecyclerViewActivity.LAYOUT_MODE_STAGGERED_GRID);
+                    bundle.putInt(RecyclerViewActivity.HOLDER_TYPE, RecyclerViewActivity.HOLDER_TYPE_IMAGE);
                     intent.putExtra(RecyclerViewActivity.EXTRA_BUNDLE, bundle);
                     startActivity(intent);
                 }

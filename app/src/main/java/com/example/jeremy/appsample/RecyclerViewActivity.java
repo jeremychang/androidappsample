@@ -8,6 +8,7 @@ import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
+import com.example.jeremy.appsample.adapter.ImageViewItemAdapter;
 import com.example.jeremy.appsample.adapter.NormalRecyclerViewAdapter;
 
 import butterknife.BindView;
@@ -19,6 +20,10 @@ public class RecyclerViewActivity extends AppCompatActivity {
     public final static int LAYOUT_MODE_LINEAR = 0;
     public final static int LAYOUT_MODE_GRID = 1;
     public final static int LAYOUT_MODE_STAGGERED_GRID = 2;
+
+    public final static String HOLDER_TYPE = "holder_type";
+    public final static int HOLDER_TYPE_TEXT = 0;
+    public final static int HOLDER_TYPE_IMAGE = 1;
 
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
@@ -39,6 +44,13 @@ public class RecyclerViewActivity extends AppCompatActivity {
         else if (mode == LAYOUT_MODE_STAGGERED_GRID) {
             mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL));//這裡用線性宮格顯示 類似於瀑布流
         }
-        mRecyclerView.setAdapter(new NormalRecyclerViewAdapter(this));
+
+        int holder_type = bundle.getInt(this.HOLDER_TYPE, HOLDER_TYPE_TEXT);
+        if (holder_type == HOLDER_TYPE_IMAGE) {
+            mRecyclerView.setAdapter(new ImageViewItemAdapter(this));
+        }
+        else if (holder_type == HOLDER_TYPE_TEXT) {
+            mRecyclerView.setAdapter(new NormalRecyclerViewAdapter(this));
+        }
     }
 }

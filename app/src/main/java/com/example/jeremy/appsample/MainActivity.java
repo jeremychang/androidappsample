@@ -8,74 +8,66 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+public class MainActivity extends AppCompatActivity {
 
     public final static String EXTRA_MESSAGE = "com.example.jeremy.widgetsample.MESSAGE";
     public final static String EXTRA_BUNDLE = "com.example.jeremy.widgetsample.BUNDLE";
     public final static String INPUT_NAME = "NAME";
     public final static String TAG = "MainActivity";
 
-
-    @Override
-    public void onClick(View view) {
-        Intent intent;
-        switch (view.getId()) {
-            case R.id.button:
-                sendMessage(view);
-                break;
-            case R.id.buttonMap:
-                Log.d(TAG, "Start MapsActivity class");
-                intent = new Intent(MainActivity.this, MapsActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.buttonWebView:
-                Log.d(TAG, "Start WebViewActivity class");
-                intent = new Intent(MainActivity.this, WebActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.buttonFragmentDemo:
-                Log.d(TAG, "Start FragmentRoogActivity class");
-                intent = new Intent(MainActivity.this, FragmentRootActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.button_viewpager:
-                intent = new Intent(MainActivity.this, ViewPagerActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.buttonBLE:
-                intent = new Intent(MainActivity.this, BLEActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.buttonRetrofitDemo:
-                intent = new Intent(MainActivity.this, RetrofitDemoActivity.class);
-                startActivity(intent);
-                break;
-            default:
-                break;
-        }
-    }
+    private ListView mListView;
+    private String[] mList = {"test", "Map", "WebView", "Fragment", "ViewPager", "BLE", "Retrofit"};
+    private ArrayAdapter<String> listAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Button button = (Button)findViewById(R.id.button);
-        button.setOnClickListener(this);
-        Button buttonMap = (Button)findViewById(R.id.buttonMap);
-        buttonMap.setOnClickListener(this);
-        Button buttonWebView = (Button)findViewById(R.id.buttonWebView);
-        buttonWebView.setOnClickListener(this);
-        Button fragmentDemoButton = (Button)findViewById(R.id.buttonFragmentDemo);
-        fragmentDemoButton.setOnClickListener(this);
-        Button viewPagerButton = (Button)findViewById(R.id.button_viewpager);
-        viewPagerButton.setOnClickListener(this);
-        Button bleButton = (Button)findViewById(R.id.buttonBLE);
-        bleButton.setOnClickListener(this);
-        Button retrofitDemoButton = (Button)findViewById(R.id.buttonRetrofitDemo);
-        retrofitDemoButton.setOnClickListener(this);
-        Log.i(TAG, "onCreate");
+        setContentView(R.layout.activity_main_list);
+
+        mListView = (ListView)findViewById(R.id.list_view);
+        listAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1, mList);
+        mListView.setAdapter(listAdapter);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent;
+                String info = ((TextView) view).getText().toString();
+                if (info.equals("test")) {
+                    sendMessage(view);
+                }
+                else if (info.equals("Map")) {
+                    intent = new Intent(MainActivity.this, MapsActivity.class);
+                    startActivity(intent);
+                }
+                else if (info.equals("WebView")) {
+                    intent = new Intent(MainActivity.this, WebActivity.class);
+                    startActivity(intent);
+                }
+                else if (info.equals("Fragment")) {
+                    intent = new Intent(MainActivity.this, FragmentRootActivity.class);
+                    startActivity(intent);
+                }
+                else if (info.equals("ViewPager")) {
+                    intent = new Intent(MainActivity.this, ViewPagerActivity.class);
+                    startActivity(intent);
+                }
+                else if (info.equals("BLE")) {
+                    intent = new Intent(MainActivity.this, BLEActivity.class);
+                    startActivity(intent);
+                }
+                else if (info.equals("Retrofit")) {
+                    intent = new Intent(MainActivity.this, RetrofitDemoActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+
     }
 
     @Override

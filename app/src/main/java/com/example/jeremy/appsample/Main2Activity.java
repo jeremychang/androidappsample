@@ -10,6 +10,8 @@ import android.widget.Toast;
 public class Main2Activity extends AppCompatActivity {
 
     public final static String TAG = "Main2Activity";
+    public final static String EXTRA_BUNDLE = "Main2Activity.BUNDLE";
+    public final static String INPUT_NAME = "Main2Activity.NAME";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,8 +20,8 @@ public class Main2Activity extends AppCompatActivity {
         setTitle("Hello Activity");
 
         TextView textView = (TextView) findViewById(R.id.textview);
-        Bundle b = this.getIntent().getBundleExtra(MainActivity.EXTRA_BUNDLE);
-        String name = b.getString(MainActivity.INPUT_NAME);
+        Bundle b = this.getIntent().getBundleExtra(EXTRA_BUNDLE);
+        String name = b.getString(INPUT_NAME);
         textView.setText(name);
         Log.i(TAG, "onCreate");
     }

@@ -16,9 +16,6 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    public final static String EXTRA_MESSAGE = "com.example.jeremy.widgetsample.MESSAGE";
-    public final static String EXTRA_BUNDLE = "com.example.jeremy.widgetsample.BUNDLE";
-    public final static String INPUT_NAME = "NAME";
     public final static String TAG = "MainActivity";
 
     private ListView mListView;
@@ -113,8 +110,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, Main2Activity.class);
 
         Bundle bundle = new Bundle();
-        bundle.putString(INPUT_NAME, "lala");
-        intent.putExtra(EXTRA_BUNDLE, bundle);
+        bundle.putString(Main2Activity.INPUT_NAME, "lala");
+        intent.putExtra(Main2Activity.EXTRA_BUNDLE, bundle);
         startActivity(intent);
     }
 

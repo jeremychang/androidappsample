@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView mListView;
     private String[] mList = {"test", "Map", "WebView", "Fragment",
                               "ViewPager", "BLE", "Retrofit",
-                              "RecyclerView"
+                              "RecyclerView", "Picasso Sample"
                              };
     private ArrayAdapter<String> listAdapter;
 
@@ -68,6 +68,12 @@ public class MainActivity extends AppCompatActivity {
                 else if (info.equals("RecyclerView")) {
                     intent = new Intent(MainActivity.this, RecyclerViewSamplesActivity.class);
                     startActivity(intent);
+                }
+                else if (info.equals("Picasso Sample")) {
+                    Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.example.picasso.development");
+                    if (launchIntent != null) {
+                        startActivity(launchIntent);
+                    }
                 }
             }
         });

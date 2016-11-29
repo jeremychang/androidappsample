@@ -12,13 +12,37 @@
 
     <LinearLayout
         android:orientation="vertical"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
             android:orientation="horizontal"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <AutoCompleteTextView
+                android:text="http://github.com"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/autoCompleteTextView"
+                android:dropDownHeight="wrap_content"
+                android:dropDownWidth="match_parent"
+                android:imeOptions="actionSend|actionDone"
+                android:layout_weight="1" />
+
+            <Button
+                android:text="Go"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button_submit1"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -36,7 +60,7 @@
                 android:text="Go"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/button_submit"
+                android:id="@+id/button_submit2"
                 android:layout_weight="1" />
 
         </LinearLayout>

@@ -13,6 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.jeremy.appsample.web.WebInterfaceService;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -78,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        WebInterfaceService.startWebServer(this);
     }
 
     @Override
@@ -148,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        WebInterfaceService.stopWebServer(this);
         Log.i(TAG, "onDestroy");
     }
 }

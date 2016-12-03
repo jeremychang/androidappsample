@@ -6,21 +6,28 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.java_websocket.client.DefaultSSLWebSocketClientFactory;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.security.GeneralSecurityException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
 
 public class WebSocketClientActivity extends Activity {
+    private static final String TAG = WebSocketClientActivity.class.getSimpleName();
     private WebSocketClient mWebSocketClient;
+    private static SSLSocketFactory sslFactory = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,8 +84,8 @@ public class WebSocketClientActivity extends Activity {
     private void connectWebSocket() {
         URI uri;
         try {
-            //uri = new URI("ws://websockethost:8080");
-            uri = new URI("ws://echo.websocket.org");
+            //uri = new URI("ws://echo.websocket.org");
+            uri = new URI("wss://echo.websocket.org");
         } catch (URISyntaxException e) {
             e.printStackTrace();
             return;
@@ -86,8 +93,8 @@ public class WebSocketClientActivity extends Activity {
 
         mWebSocketClient = new WebSocketClient(uri) {
             @Override
-            public void onOpen(ServerHandshake serverHandshake) {
-                Log.i("Websocket", "Opened");
+            public void onOpen(ServerHandshake handshakedata) {
+                Log.i(TAG, "Open: " + handshakedata.toString());
                 mWebSocketClient.send("Opened " + uri.toString());
                 mWebSocketClient.send("Hello from " + Build.MANUFACTURER + " " + Build.MODEL);
             }
@@ -106,14 +113,33 @@ public class WebSocketClientActivity extends Activity {
 
             @Override
             public void onClose(int i, String s, boolean b) {
-                Log.i("Websocket", "Closed " + s);
+                Log.i(TAG, "Closed " + s);
             }
 
             @Override
             public void onError(Exception e) {
-                Log.i("Websocket", "Error " + e.getMessage());
+                Log.i(TAG, "Error " + e.getMessage());
             }
         };
+
+        if (mWebSocketClient.getURI().getScheme().equals("wss")) {
+            Log.i(TAG, "using wss scheme");
+            SSLContext sslContext = null;
+            try {
+                //SSLSocket sslSocket = (SSLSocket) getSSLFactory().createSocket();
+                //sslSocket.setEnabledProtocols(new String[] {"TLSv1"});
+                //mWebSocketClient.setSocket(sslSocket);
+                sslContext = SSLContext.getInstance( "TLS" );
+                // will use java's default key and trust store which is
+                // sufficient unless you deal with self-signed certificates
+                //sslContext.init( null, null, null );
+                sslContext = SSLContext.getDefault();
+                mWebSocketClient.setWebSocketFactory( new DefaultSSLWebSocketClientFactory( sslContext ) );
+            } catch (GeneralSecurityException e) {
+                return;
+            }
+        }
+
         mWebSocketClient.connect();
     }
 

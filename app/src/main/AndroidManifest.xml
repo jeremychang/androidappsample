@@ -98,12 +98,13 @@
         <service
             android:name=".BluetoothLeService"
             android:enabled="true" />
-
+    
         <activity android:name=".RecyclerViewActivity" />
         <activity android:name=".RecyclerViewSamplesActivity"></activity>
         <service android:name=".web.WebInterfaceService"
             android:permission="com.example.jeremy.appsample"
             android:exported="false" />
+        <activity android:name=".WebSocketClientActivity" />
 
     </application>
 

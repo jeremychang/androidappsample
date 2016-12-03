@@ -114,4 +114,6 @@
     <string name="device_bond_state_none">NOT BOUNDED</string>
     <string name="device_bond_state_bonding">BOUNDING</string>
     <string name="device_bond_state_bonded">BOUNDED</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>

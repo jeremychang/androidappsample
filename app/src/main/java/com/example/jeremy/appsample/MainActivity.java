@@ -23,7 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private ListView mListView;
     private String[] mList = {"test", "Map", "WebView", "Fragment",
                               "ViewPager", "BLE", "Retrofit",
-                              "RecyclerView", "Picasso Sample"
+                              "RecyclerView", "Picasso Sample",
+                               "WebSocket"
                              };
     private ArrayAdapter<String> listAdapter;
 
@@ -76,6 +77,10 @@ public class MainActivity extends AppCompatActivity {
                     if (launchIntent != null) {
                         startActivity(launchIntent);
                     }
+                }
+                else if (info.equals("WebSocket")) {
+                    intent = new Intent(MainActivity.this, WebSocketClientActivity.class);
+                    startActivity(intent);
                 }
             }
         });
